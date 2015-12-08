@@ -14,7 +14,16 @@
                 </div>
             </div>
         </fieldset>
-        <div class="alert alert-warning" ng-show="playlistForm.$invalid && playlistForm.$dirty">Please enter a title!</div>
+        <div class="form-group">
+            <div class="col-xs-10 col-xs-offset-2" ng-messages="playlistForm.name.$error" role="alert">
+                <div ng-message="required">Please enter a title</div>
+            </div>
+<!--             <div ng-messages for="playlistForm" role="alert">
+                <div ng-message when-exp="playlistForm.$invalid && playlistForm.$dirty">Please enter a title!
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="alert alert-warning" ng-show="playlistForm.$invalid && playlistForm.$dirty">Please enter a title!</div> -->
     </form>
-<!--     <pre>{{playlistForm | json}}</pre> -->
+    <!-- <pre>{{playlistForm | json}}</pre> -->
 </div>
