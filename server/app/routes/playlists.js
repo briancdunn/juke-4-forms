@@ -24,7 +24,15 @@ router.post('/', function(req, res, next) {
 router.param('playlistId', function(req, res, next, id) {
   mongoose.model('Playlist')
     .findById(id)
-    .populate('artists songs')
+    .populate('songs artists')
+    // .exec(function(err,data) {
+    //   var promiseArray = data["songs"].map(function(song) {
+    //     return mongoose.model('Song').populate(song,'artists');
+    //   });
+    //   console.dir(data._doc.songs);
+    //   return Promise.all(promiseArray);
+    // })
+    // .populate({ path: 'songs', populate: { path: 'artists' } })
     .then(function(playlist) {
       if(!playlist) throw new Error('not found!')
       req.playlist = playlist
@@ -34,6 +42,7 @@ router.param('playlistId', function(req, res, next, id) {
 })
 
 router.get('/:playlistId', function(req, res) {
+  console.log(req.playlist)
   res.json(req.playlist)
 })
 
