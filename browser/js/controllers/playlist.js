@@ -2,12 +2,9 @@ app.controller('PlaylistCtrl', function ($scope, playlist, SongFactory, PlayerFa
 
   $scope.playlist = playlist;
   $scope.playlist.songs = playlist.songs.map(function(song) {
-    console.log(song.artists);
-    return SongFactory.convert(song,song.artists[0]);
+    return SongFactory.convert(song,playlist.artists);
   })
-  console.log($scope.playlist.songs);
   $scope.songs = songs;
-  // console.dir($scope.playlist);
 
   $scope.isCurrent = function(song) {
     return song === PlayerFactory.getCurrentSong();
@@ -18,11 +15,13 @@ app.controller('PlaylistCtrl', function ($scope, playlist, SongFactory, PlayerFa
   };
 
   $scope.addSong = function(id) {
-    // console.log('PLAYLISTCTRL',$scope.songSelect);
+    console.log($scope.songSelect);
     PlaylistFactory.addSong(id,$scope.songSelect)
     .then(function(playlistUpdate) {
-      console.log(playlistUpdate);
       $scope.playlist.songs.push(SongFactory.convert(playlistUpdate));
+      $scope.songSelect = null;
+      $scope.addSongForm.$setPristine();
+      $scope.addSongForm.$setUntouched();
     });
   }
 

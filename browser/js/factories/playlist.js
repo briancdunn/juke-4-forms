@@ -29,10 +29,8 @@ app.factory('PlaylistFactory', function ($http) {
     }
 
     PlaylistFactory.addSong = function(id,song) {
-        console.log(song);
         return $http.post('/api/playlists/'+id+'/songs',{ song: song })
         .then(function(song) {
-            console.log(song);
             return song.data;
         })
         .catch(function(err) {

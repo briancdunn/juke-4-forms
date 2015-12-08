@@ -8,7 +8,6 @@ app.config(function ($stateProvider) {
         return PlaylistFactory.fetchById($stateParams.id);
       },
       songs: function (SongFactory) {
-        console.log('asdf')
         return SongFactory.fetchAll();
       }
     }
